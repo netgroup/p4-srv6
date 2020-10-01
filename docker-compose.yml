@@ -1,0 +1,44 @@
+version: "3"
+
+services:
+  mininet:
+    image: opennetworking/ngsdn-tutorial:stratum_bmv2
+    hostname: mininet
+    container_name: mininet
+    privileged: true
+    tty: true
+    stdin_open: true
+    restart: always
+    volumes:
+      - ./tmp:/tmp
+      - ./mininet:/mininet
+    ports:
+      - "50001:50001"
+      - "50002:50002"
+      - "50003:50003"
+      - "50004:50004"
+      - "50005:50005"
+      - "50006:50006"
+      - "50007:50007"
+      - "50008:50008"
+      - "50009:50009"
+      - "50010:50010"
+      - "50011:50011"
+      - "50012:50012"
+      - "50013:50013"
+      - "50015:50014"
+    entrypoint: "/mininet/topo.py"
+  onos:
+    image: onosproject/onos:2.2.2
+    hostname: onos
+    container_name: onos
+    ports:
+      - "8181:8181" # HTTP
+      - "8101:8101" # SSH (CLI)
+    volumes:
+      - ./tmp/onos:/root/onos/apache-karaf-4.2.8/data/tmp
+      - ./config:/config 
+    environment:
+      - ONOS_APPS=gui2,drivers.bmv2,lldpprovider,hostprovider
+    links:
+      - mininet

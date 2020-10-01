@@ -1,0 +1,6 @@
+# use case 1
+srv6-insert device:r1 fcbb:bb00:8:7:2:fd00:: 2001:1:2::1
+srv6-insert device:r2 fcbb:bb00:7:8:1:fd00:: 2001:1:1::1
+
+# use case 2
+srv6-insert device:r1 fcbb:bb00:9:fa94:a:faa5:b:c fcbb:bb00:e:2:fd00:: 2001:1:2::1

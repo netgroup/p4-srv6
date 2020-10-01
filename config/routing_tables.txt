@@ -1,0 +1,465 @@
+############ r1
+#h1
+route-insert device:r1 2001:1:1::1 128 00:00:00:00:00:10
+#h2
+route-insert device:r1 2001:1:2::1 128 00:aa:00:00:00:09
+
+#r2
+route-insert device:r1 fcbb:bb00:02:: 48 00:aa:00:00:00:09
+#r3
+route-insert device:r1 fcbb:bb00:03:: 48 00:aa:00:00:00:09
+#r4
+route-insert device:r1 fcbb:bb00:04:: 48 00:aa:00:00:00:04
+#r5
+route-insert device:r1 fcbb:bb00:05:: 48 00:aa:00:00:00:04
+#r6
+route-insert device:r1 fcbb:bb00:06:: 48 00:aa:00:00:00:09
+#r7
+route-insert device:r1 fcbb:bb00:07:: 48 00:aa:00:00:00:09
+#r8
+route-insert device:r1 fcbb:bb00:08:: 48 00:aa:00:00:00:04
+#r9
+route-insert device:r1 fcbb:bb00:09:: 48 00:aa:00:00:00:09
+#r10
+route-insert device:r1 fcbb:bb00:0a:: 48 00:aa:00:00:00:04
+#r11
+route-insert device:r1 fcbb:bb00:0b:: 48 00:aa:00:00:00:04
+#r12
+route-insert device:r1 fcbb:bb00:0c:: 48 00:aa:00:00:00:04
+#r13
+route-insert device:r1 fcbb:bb00:0d:: 48 00:aa:00:00:00:09
+#r14
+route-insert device:r1 fcbb:bb00:0e:: 48 00:aa:00:00:00:09
+
+############ r2
+#h1
+route-insert device:r2 2001:1:1::1 128 00:aa:00:00:00:0e
+#h2
+route-insert device:r2 2001:1:2::1 128 00:00:00:00:00:20
+
+#r1
+route-insert device:r2 fcbb:bb00:01:: 48 00:aa:00:00:00:0e
+#r3
+route-insert device:r2 fcbb:bb00:03:: 48 00:aa:00:00:00:03
+#r4
+route-insert device:r2 fcbb:bb00:04:: 48 00:aa:00:00:00:0e
+#r5
+route-insert device:r2 fcbb:bb00:05:: 48 00:aa:00:00:00:0e
+#r6
+route-insert device:r2 fcbb:bb00:06:: 48 00:aa:00:00:00:03
+#r7
+route-insert device:r2 fcbb:bb00:07:: 48 00:aa:00:00:00:03
+#r8
+route-insert device:r2 fcbb:bb00:08:: 48 00:aa:00:00:00:0e
+#r9
+route-insert device:r2 fcbb:bb00:09:: 48 00:aa:00:00:00:0e
+#r10
+route-insert device:r2 fcbb:bb00:0a:: 48 00:aa:00:00:00:03
+#r11
+route-insert device:r2 fcbb:bb00:0b:: 48 00:aa:00:00:00:03
+#r12
+route-insert device:r2 fcbb:bb00:0c:: 48 00:aa:00:00:00:03
+#r13
+route-insert device:r2 fcbb:bb00:0d:: 48 00:aa:00:00:00:03
+#r14
+route-insert device:r2 fcbb:bb00:0e:: 48 00:aa:00:00:00:0e
+
+
+############ r3
+#h1
+route-insert device:r3 2001:1:1::1 128 00:aa:00:00:00:02
+#h2
+route-insert device:r3 2001:1:2::1 128 00:aa:00:00:00:02
+
+#r1
+route-insert device:r3 fcbb:bb00:01:: 48 00:aa:00:00:00:0e
+#r2
+route-insert device:r3 fcbb:bb00:02:: 48 00:aa:00:00:00:02
+#r4
+route-insert device:r3 fcbb:bb00:04:: 48 00:aa:00:00:00:0d
+#r5
+route-insert device:r3 fcbb:bb00:05:: 48 00:aa:00:00:00:0d
+#r6
+route-insert device:r3 fcbb:bb00:06:: 48 00:aa:00:00:00:06
+#r7
+route-insert device:r3 fcbb:bb00:07:: 48 00:aa:00:00:00:06
+#r8
+route-insert device:r3 fcbb:bb00:08:: 48 00:aa:00:00:00:06
+#r9
+route-insert device:r3 fcbb:bb00:09:: 48 00:aa:00:00:00:0e
+#r10
+route-insert device:r3 fcbb:bb00:0a:: 48 00:aa:00:00:00:0d
+#r11
+route-insert device:r3 fcbb:bb00:0b:: 48 00:aa:00:00:00:0d
+#r12
+route-insert device:r3 fcbb:bb00:0c:: 48 00:aa:00:00:00:0d
+#r13
+route-insert device:r3 fcbb:bb00:0d:: 48 00:aa:00:00:00:0d
+#r14
+route-insert device:r3 fcbb:bb00:0e:: 48 00:aa:00:00:00:0e
+
+
+############ r4
+#h1
+route-insert device:r4 2001:1:1::1 128 00:aa:00:00:00:01
+#h2
+route-insert device:r4 2001:1:2::1 128 00:aa:00:00:00:09
+
+#r1
+route-insert device:r4 fcbb:bb00:01:: 48 00:aa:00:00:00:01
+#r2
+route-insert device:r4 fcbb:bb00:02:: 48 00:aa:00:00:00:09
+#r3
+route-insert device:r4 fcbb:bb00:03:: 48 00:aa:00:00:00:0a
+#r5
+route-insert device:r4 fcbb:bb00:05:: 48 00:aa:00:00:00:05
+#r6
+route-insert device:r4 fcbb:bb00:06:: 48 00:aa:00:00:00:0a
+#r7
+route-insert device:r4 fcbb:bb00:07:: 48 00:aa:00:00:00:05
+#r8
+route-insert device:r4 fcbb:bb00:08:: 48 00:aa:00:00:00:05
+#r9
+route-insert device:r4 fcbb:bb00:09:: 48 00:aa:00:00:00:09
+#r10
+route-insert device:r4 fcbb:bb00:0a:: 48 00:aa:00:00:00:0a
+#r11
+route-insert device:r4 fcbb:bb00:0b:: 48 00:aa:00:00:00:0a
+#r12
+route-insert device:r4 fcbb:bb00:0c:: 48 00:aa:00:00:00:0a
+#r13
+route-insert device:r4 fcbb:bb00:0d:: 48 00:aa:00:00:00:0a
+#r14
+route-insert device:r4 fcbb:bb00:0e:: 48 00:aa:00:00:00:09
+
+
+############ r5
+#h1
+route-insert device:r5 2001:1:1::1 128 00:aa:00:00:00:04
+#h2
+route-insert device:r5 2001:1:2::1 128 00:aa:00:00:00:0a
+
+#r1
+route-insert device:r5 fcbb:bb00:01:: 48 00:aa:00:00:00:04
+#r2
+route-insert device:r5 fcbb:bb00:02:: 48 00:aa:00:00:00:0a
+#r3
+route-insert device:r5 fcbb:bb00:03:: 48 00:aa:00:00:00:0a
+#r4
+route-insert device:r5 fcbb:bb00:04:: 48 00:aa:00:00:00:04
+#r6
+route-insert device:r5 fcbb:bb00:06:: 48 00:aa:00:00:00:0b
+#r7
+route-insert device:r5 fcbb:bb00:07:: 48 00:aa:00:00:00:08
+#r8
+route-insert device:r5 fcbb:bb00:08:: 48 00:aa:00:00:00:08
+#r9
+route-insert device:r5 fcbb:bb00:09:: 48 00:aa:00:00:00:0a
+#r10
+route-insert device:r5 fcbb:bb00:0a:: 48 00:aa:00:00:00:0a
+#r11
+route-insert device:r5 fcbb:bb00:0b:: 48 00:aa:00:00:00:0b
+#r12
+route-insert device:r5 fcbb:bb00:0c:: 48 00:aa:00:00:00:0b
+#r13
+route-insert device:r5 fcbb:bb00:0d:: 48 00:aa:00:00:00:0a
+#r14
+route-insert device:r5 fcbb:bb00:0e:: 48 00:aa:00:00:00:0a
+
+############ r6
+#h1
+route-insert device:r6 2001:1:1::1 128 00:aa:00:00:00:0d
+#h2
+route-insert device:r6 2001:1:2::1 128 00:aa:00:00:00:03
+
+#r1
+route-insert device:r6 fcbb:bb00:01:: 48 00:aa:00:00:00:0d
+#r2
+route-insert device:r6 fcbb:bb00:02:: 48 00:aa:00:00:00:03
+#r3
+route-insert device:r6 fcbb:bb00:03:: 48 00:aa:00:00:00:03
+#r4
+route-insert device:r6 fcbb:bb00:04:: 48 00:aa:00:00:00:0d
+#r5
+route-insert device:r6 fcbb:bb00:05:: 48 00:aa:00:00:00:0d
+#r7
+route-insert device:r6 fcbb:bb00:07:: 48 00:aa:00:00:00:07
+#r8
+route-insert device:r6 fcbb:bb00:08:: 48 00:aa:00:00:00:07
+#r9
+route-insert device:r6 fcbb:bb00:09:: 48 00:aa:00:00:00:0d
+#r10
+route-insert device:r6 fcbb:bb00:0a:: 48 00:aa:00:00:00:0d
+#r11
+route-insert device:r6 fcbb:bb00:0b:: 48 00:aa:00:00:00:0c
+#r12
+route-insert device:r6 fcbb:bb00:0c:: 48 00:aa:00:00:00:0c
+#r13
+route-insert device:r6 fcbb:bb00:0d:: 48 00:aa:00:00:00:0d
+#r14
+route-insert device:r6 fcbb:bb00:0e:: 48 00:aa:00:00:00:0d
+
+############ r7
+#h1
+route-insert device:r7 2001:1:1::1 128 00:aa:00:00:00:08
+#h2
+route-insert device:r7 2001:1:2::1 128 00:aa:00:00:00:06
+
+#r1
+route-insert device:r7 fcbb:bb00:01:: 48 00:aa:00:00:00:0c
+#r2
+route-insert device:r7 fcbb:bb00:02:: 48 00:aa:00:00:00:06
+#r3
+route-insert device:r7 fcbb:bb00:03:: 48 00:aa:00:00:00:06
+#r4
+route-insert device:r7 fcbb:bb00:04:: 48 00:aa:00:00:00:0c
+#r5
+route-insert device:r7 fcbb:bb00:05:: 48 00:aa:00:00:00:08
+#r6
+route-insert device:r7 fcbb:bb00:06:: 48 00:aa:00:00:00:06
+#r8
+route-insert device:r7 fcbb:bb00:08:: 48 00:aa:00:00:00:08
+#r9
+route-insert device:r7 fcbb:bb00:09:: 48 00:aa:00:00:00:0c
+#r10
+route-insert device:r7 fcbb:bb00:0a:: 48 00:aa:00:00:00:0c
+#r11
+route-insert device:r7 fcbb:bb00:0b:: 48 00:aa:00:00:00:0c
+#r12
+route-insert device:r7 fcbb:bb00:0c:: 48 00:aa:00:00:00:0c
+#r13
+route-insert device:r7 fcbb:bb00:0d:: 48 00:aa:00:00:00:0c
+#r14
+route-insert device:r7 fcbb:bb00:0e:: 48 00:aa:00:00:00:0c
+
+############ r8
+#h1
+route-insert device:r8 2001:1:1::1 128 00:aa:00:00:00:05
+#h2
+route-insert device:r8 2001:1:2::1 128 00:aa:00:00:00:07
+
+#r1
+route-insert device:r8 fcbb:bb00:01:: 48 00:aa:00:00:00:05
+#r2
+route-insert device:r8 fcbb:bb00:02:: 48 00:aa:00:00:00:0b
+#r3
+route-insert device:r8 fcbb:bb00:03:: 48 00:aa:00:00:00:0b
+#r4
+route-insert device:r8 fcbb:bb00:04:: 48 00:aa:00:00:00:05
+#r5
+route-insert device:r8 fcbb:bb00:05:: 48 00:aa:00:00:00:05
+#r6
+route-insert device:r8 fcbb:bb00:06:: 48 00:aa:00:00:00:07
+#r7
+route-insert device:r8 fcbb:bb00:07:: 48 00:aa:00:00:00:07
+#r9
+route-insert device:r8 fcbb:bb00:09:: 48 00:aa:00:00:00:0b
+#r10
+route-insert device:r8 fcbb:bb00:0a:: 48 00:aa:00:00:00:0b
+#r11
+route-insert device:r8 fcbb:bb00:0b:: 48 00:aa:00:00:00:0b
+#r12
+route-insert device:r8 fcbb:bb00:0c:: 48 00:aa:00:00:00:0b
+#r13
+route-insert device:r8 fcbb:bb00:0d:: 48 00:aa:00:00:00:0b
+#r14
+route-insert device:r8 fcbb:bb00:0e:: 48 00:aa:00:00:00:0b
+
+############ r9
+#h1
+route-insert device:r9 2001:1:1::1 128 00:aa:00:00:00:01
+#h2
+route-insert device:r9 2001:1:2::1 128 00:aa:00:00:00:0e
+
+#r1
+route-insert device:r9 fcbb:bb00:01:: 48 00:aa:00:00:00:01
+#r2
+route-insert device:r9 fcbb:bb00:02:: 48 00:aa:00:00:00:0e
+#r3
+route-insert device:r9 fcbb:bb00:03:: 48 00:aa:00:00:00:0e
+#r4
+route-insert device:r9 fcbb:bb00:04:: 48 00:aa:00:00:00:04
+#r5
+route-insert device:r9 fcbb:bb00:05:: 48 00:aa:00:00:00:0a
+#r6
+route-insert device:r9 fcbb:bb00:06:: 48 00:aa:00:00:00:0d
+#r7
+route-insert device:r9 fcbb:bb00:07:: 48 00:aa:00:00:00:0d
+#r8
+route-insert device:r9 fcbb:bb00:08:: 48 00:aa:00:00:00:0a
+#r10
+route-insert device:r9 fcbb:bb00:0a:: 48 00:aa:00:00:00:0a
+#r11
+route-insert device:r9 fcbb:bb00:0b:: 48 00:aa:00:00:00:0a
+#r12
+route-insert device:r9 fcbb:bb00:0c:: 48 00:aa:00:00:00:0a
+#r13
+route-insert device:r9 fcbb:bb00:0d:: 48 00:aa:00:00:00:0d
+#r14
+route-insert device:r9 fcbb:bb00:0e:: 48 00:aa:00:00:00:0e
+
+############ r10
+#h1
+route-insert device:r10 2001:1:1::1 128 00:aa:00:00:00:04
+#h2
+route-insert device:r10 2001:1:2::1 128 00:aa:00:00:00:0d
+
+#r1
+route-insert device:r10 fcbb:bb00:01:: 48 00:aa:00:00:00:09
+#r2
+route-insert device:r10 fcbb:bb00:02:: 48 00:aa:00:00:00:0e
+#r3
+route-insert device:r10 fcbb:bb00:03:: 48 00:aa:00:00:00:0d
+#r4
+route-insert device:r10 fcbb:bb00:04:: 48 00:aa:00:00:00:04
+#r5
+route-insert device:r10 fcbb:bb00:05:: 48 00:aa:00:00:00:05
+#r6
+route-insert device:r10 fcbb:bb00:06:: 48 00:aa:00:00:00:0d
+#r7
+route-insert device:r10 fcbb:bb00:07:: 48 00:aa:00:00:00:0c
+#r8
+route-insert device:r10 fcbb:bb00:08:: 48 00:aa:00:00:00:0b
+#r9
+route-insert device:r10 fcbb:bb00:09:: 48 00:aa:00:00:00:09
+#r11
+route-insert device:r10 fcbb:bb00:0b:: 48 00:aa:00:00:00:0b
+#r12
+route-insert device:r10 fcbb:bb00:0c:: 48 00:aa:00:00:00:0c
+#r13
+route-insert device:r10 fcbb:bb00:0d:: 48 00:aa:00:00:00:0d
+#r14
+route-insert device:r10 fcbb:bb00:0e:: 48 00:aa:00:00:00:0e
+
+############ r11
+#h1
+route-insert device:r11 2001:1:1::1 128 00:aa:00:00:00:0a
+#h2
+route-insert device:r11 2001:1:2::1 128 00:aa:00:00:00:0d
+
+#r1
+route-insert device:r11 fcbb:bb00:01:: 48 00:aa:00:00:00:0a
+#r2
+route-insert device:r11 fcbb:bb00:02:: 48 00:aa:00:00:00:0d
+#r3
+route-insert device:r11 fcbb:bb00:03:: 48 00:aa:00:00:00:0d
+#r4
+route-insert device:r11 fcbb:bb00:04:: 48 00:aa:00:00:00:0a
+#r5
+route-insert device:r11 fcbb:bb00:05:: 48 00:aa:00:00:00:05
+#r6
+route-insert device:r11 fcbb:bb00:06:: 48 00:aa:00:00:00:0c
+#r7
+route-insert device:r11 fcbb:bb00:07:: 48 00:aa:00:00:00:0c
+#r8
+route-insert device:r11 fcbb:bb00:08:: 48 00:aa:00:00:00:08
+#r9
+route-insert device:r11 fcbb:bb00:09:: 48 00:aa:00:00:00:0a
+#r10
+route-insert device:r11 fcbb:bb00:0a:: 48 00:aa:00:00:00:0a
+#r12
+route-insert device:r11 fcbb:bb00:0c:: 48 00:aa:00:00:00:0c
+#r13
+route-insert device:r11 fcbb:bb00:0d:: 48 00:aa:00:00:00:0d
+#r14
+route-insert device:r11 fcbb:bb00:0e:: 48 00:aa:00:00:00:0d
+
+
+############ r12
+#h1
+route-insert device:r12 2001:1:1::1 128 00:aa:00:00:00:0a
+#h2
+route-insert device:r12 2001:1:2::1 128 00:aa:00:00:00:0d
+
+#r1
+route-insert device:r12 fcbb:bb00:01:: 48 00:aa:00:00:00:0a
+#r2
+route-insert device:r12 fcbb:bb00:02:: 48 00:aa:00:00:00:0d
+#r3
+route-insert device:r12 fcbb:bb00:03:: 48 00:aa:00:00:00:0d
+#r4
+route-insert device:r12 fcbb:bb00:04:: 48 00:aa:00:00:00:0a
+#r5
+route-insert device:r12 fcbb:bb00:05:: 48 00:aa:00:00:00:0b
+#r6
+route-insert device:r12 fcbb:bb00:06:: 48 00:aa:00:00:00:06
+#r7
+route-insert device:r12 fcbb:bb00:07:: 48 00:aa:00:00:00:07
+#r8
+route-insert device:r12 fcbb:bb00:08:: 48 00:aa:00:00:00:0b
+#r9
+route-insert device:r12 fcbb:bb00:09:: 48 00:aa:00:00:00:0a
+#r10
+route-insert device:r12 fcbb:bb00:0a:: 48 00:aa:00:00:00:0a
+#r11
+route-insert device:r12 fcbb:bb00:0b:: 48 00:aa:00:00:00:0b
+#r13
+route-insert device:r12 fcbb:bb00:0d:: 48 00:aa:00:00:00:0d
+#r14
+route-insert device:r12 fcbb:bb00:0e:: 48 00:aa:00:00:00:0d
+
+############ r13
+#h1
+route-insert device:r13 2001:1:1::1 128 00:aa:00:00:00:09
+#h2
+route-insert device:r13 2001:1:2::1 128 00:aa:00:00:00:0e
+
+#r1
+route-insert device:r13 fcbb:bb00:01:: 48 00:aa:00:00:00:09
+#r2
+route-insert device:r13 fcbb:bb00:02:: 48 00:aa:00:00:00:0e
+#r3
+route-insert device:r13 fcbb:bb00:03:: 48 00:aa:00:00:00:03
+#r4
+route-insert device:r13 fcbb:bb00:04:: 48 00:aa:00:00:00:0a
+#r5
+route-insert device:r13 fcbb:bb00:05:: 48 00:aa:00:00:00:0a
+#r6
+route-insert device:r13 fcbb:bb00:06:: 48 00:aa:00:00:00:06
+#r7
+route-insert device:r13 fcbb:bb00:07:: 48 00:aa:00:00:00:0c
+#r8
+route-insert device:r13 fcbb:bb00:08:: 48 00:aa:00:00:00:0b
+#r9
+route-insert device:r13 fcbb:bb00:09:: 48 00:aa:00:00:00:09
+#r10
+route-insert device:r13 fcbb:bb00:0a:: 48 00:aa:00:00:00:0a
+#r11
+route-insert device:r13 fcbb:bb00:0b:: 48 00:aa:00:00:00:0b
+#r12
+route-insert device:r13 fcbb:bb00:0c:: 48 00:aa:00:00:00:0c
+#r14
+route-insert device:r13 fcbb:bb00:0e:: 48 00:aa:00:00:00:0e
+
+############ r14
+#h1
+route-insert device:r14 2001:1:1::1 128 00:aa:00:00:00:09
+#h2
+route-insert device:r14 2001:1:2::1 128 00:aa:00:00:00:02
+
+#r1
+route-insert device:r14 fcbb:bb00:01:: 48 00:aa:00:00:00:09
+#r2
+route-insert device:r14 fcbb:bb00:02:: 48 00:aa:00:00:00:02
+#r3
+route-insert device:r14 fcbb:bb00:03:: 48 00:aa:00:00:00:03
+#r4
+route-insert device:r14 fcbb:bb00:04:: 48 00:aa:00:00:00:09
+#r5
+route-insert device:r14 fcbb:bb00:05:: 48 00:aa:00:00:00:0a
+#r6
+route-insert device:r14 fcbb:bb00:06:: 48 00:aa:00:00:00:0d
+#r7
+route-insert device:r14 fcbb:bb00:07:: 48 00:aa:00:00:00:0d
+#r8
+route-insert device:r14 fcbb:bb00:08:: 48 00:aa:00:00:00:0a
+#r9
+route-insert device:r14 fcbb:bb00:09:: 48 00:aa:00:00:00:09
+#r10
+route-insert device:r14 fcbb:bb00:0a:: 48 00:aa:00:00:00:0a
+#r11
+route-insert device:r14 fcbb:bb00:0b:: 48 00:aa:00:00:00:0a
+#r12
+route-insert device:r14 fcbb:bb00:0c:: 48 00:aa:00:00:00:0d
+#r13 
+route-insert device:r14 fcbb:bb00:0d:: 48 00:aa:00:00:00:0d

@@ -1,0 +1,2 @@
+uA-insert device:r9 fcbb:bb00:9:fa94:: fcbb:bb00:4:: 00:aa:00:00:00:04
+uA-insert device:r10 fcbb:bb00:a:faa5:: fcbb:bb00:5:: 00:aa:00:00:00:05
