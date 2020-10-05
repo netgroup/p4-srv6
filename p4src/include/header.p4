@@ -146,6 +146,7 @@ struct local_metadata_t {
     bit<8> icmp_type;
     l4_port_t l4_src_port;
     l4_port_t l4_dst_port;
+    bool ipv4_update;
 }
 
 struct parsed_headers_t {

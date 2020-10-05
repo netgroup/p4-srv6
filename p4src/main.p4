@@ -96,6 +96,25 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
         counters = routing_v6_counter;
     }
 
+    // TODO calc checksum
+    action set_next_hop_v4(mac_addr_t next_hop) {
+        hdr.ethernet.src_addr = hdr.ethernet.dst_addr;
+        hdr.ethernet.dst_addr = next_hop;
+        hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
+        local_metadata.ipv4_update = true;
+    }
+
+    direct_counter(CounterType.packets_and_bytes) routing_v4_counter;
+    table routing_v4 {
+        key = {
+            hdr.ipv4.dst_addr: lpm;
+        }
+        actions = {
+            set_next_hop_v4;
+        }
+        counters = routing_v4_counter;
+    }
+
     /*
      * NDP reply table and actions.
      * Handles NDP router solicitation message and send router advertisement to the sender.
@@ -156,6 +175,12 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
         hdr.srv6_list[0].setInvalid();
     }
 
+    action end_action_DX4()  {
+        hdr.srv6_list[0].setInvalid();
+        hdr.srv6h.setInvalid();
+        hdr.ipv6.setInvalid();
+    } 
+
     direct_counter(CounterType.packets_and_bytes) my_sid_table_counter;
     table my_sid_table {
         key = {
@@ -166,6 +191,7 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
             end_action_un;
             end_action_ua;
             end_action_DX6;
+            end_action_DX4;
             NoAction;
         }
         default_action = NoAction;
@@ -381,6 +407,9 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
                         // set destination IP address to next segment
                         hdr.ipv6.dst_addr = hdr.srv6_list[0].segment_id;
                     }
+                }
+                end_action_DX4: {
+                    routing_v4.apply();
                 }
             }
 
