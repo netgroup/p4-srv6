@@ -369,26 +369,29 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
 	    }
 
 	    if (l2_firewall.apply().hit) {
-
-            if (!srv6_encap_v4.apply().hit) {
-                switch(my_sid_table.apply().action_run) {
-                    end_action: {
-                        // support for reduced SRH
-                        if (hdr.srv6h.segment_left > 0) {
-                            // set destination IP address to next segment
-                            hdr.ipv6.dst_addr = local_metadata.next_srv6_sid;
-                            // decrement segments left
-                            hdr.srv6h.segment_left = hdr.srv6h.segment_left - 1;
-                        } else {
-                            // set destination IP address to next segment
-                            hdr.ipv6.dst_addr = hdr.srv6_list[0].segment_id;
-                        }
+            switch(my_sid_table.apply().action_run) {
+                end_action: {
+                    // support for reduced SRH
+                    if (hdr.srv6h.segment_left > 0) {
+                        // set destination IP address to next segment
+                        hdr.ipv6.dst_addr = local_metadata.next_srv6_sid;
+                        // decrement segments left
+                        hdr.srv6h.segment_left = hdr.srv6h.segment_left - 1;
+                    } else {
+                        // set destination IP address to next segment
+                        hdr.ipv6.dst_addr = hdr.srv6_list[0].segment_id;
                     }
                 }
-            }   
+            }
+
+            // SRv6 Encapsulation
+            if (hdr.ipv4.isValid() && !hdr.ipv6.isValid()) {
+                srv6_encap_v4.apply();
+            } else {
+                srv6_encap.apply();
+            }
             
             if (!local_metadata.xconnect) {
-                srv6_encap.apply();                       
 	            routing_v6.apply();
 	        } else {
                 xconnect_table.apply();
