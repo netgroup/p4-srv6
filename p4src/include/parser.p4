@@ -172,11 +172,11 @@ control DeparserImpl(packet_out packet, in parsed_headers_t hdr) {
         packet.emit(hdr.packet_in);
         packet.emit(hdr.ethernet);
         packet.emit(hdr.arp);
-        packet.emit(hdr.ipv4);
         packet.emit(hdr.ipv6);
         packet.emit(hdr.srv6h);
         packet.emit(hdr.srv6_list);
         packet.emit(hdr.ipv6_inner);
+        packet.emit(hdr.ipv4);
         packet.emit(hdr.tcp);
         packet.emit(hdr.udp);
         packet.emit(hdr.icmp);

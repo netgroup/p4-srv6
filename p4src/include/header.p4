@@ -150,9 +150,9 @@ struct local_metadata_t {
 
 struct parsed_headers_t {
     ethernet_t ethernet;
-    ipv4_t ipv4;
     ipv6_t ipv6;
     ipv6_t ipv6_inner;
+    ipv4_t ipv4;
     srv6h_t srv6h;
     srv6_list_t[MAX_HOPS] srv6_list;
     arp_t arp;

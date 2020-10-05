@@ -252,6 +252,78 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
         counters = srv6_encap_table_counter;
     }
 
+    action usid_encap_1_v4(ipv6_addr_t src_addr, ipv6_addr_t s1) {
+        hdr.ipv6.setValid();
+
+        hdr.ipv6.version = 6;
+        hdr.ipv6.traffic_class = hdr.ipv4.dscp ++ hdr.ipv4.ecn; 
+        hash(hdr.ipv6.flow_label, 
+                HashAlgorithm.crc32, 
+                (bit<20>) 0, 
+                { 
+                    hdr.ipv4.src_addr,
+                    hdr.ipv4.dst_addr,
+                    local_metadata.ip_proto,
+                    local_metadata.l4_src_port,
+                    local_metadata.l4_dst_port
+                },
+                (bit<20>) 1048575);
+        hdr.ipv6.payload_len = hdr.ipv4.total_len ;
+        hdr.ipv6.next_hdr = PROTO_IP_IN_IP;
+        hdr.ipv6.hop_limit = hdr.ipv4.ttl;
+        hdr.ipv6.src_addr = src_addr;
+        hdr.ipv6.dst_addr = s1;
+    }
+
+    action usid_encap_2_v4(ipv6_addr_t src_addr, ipv6_addr_t s1, ipv6_addr_t s2) {
+        hdr.ipv6.setValid();
+
+        hdr.ipv6.version = 6;
+        hdr.ipv6.traffic_class = hdr.ipv4.dscp ++ hdr.ipv4.ecn; 
+        hash(hdr.ipv6.flow_label, 
+                HashAlgorithm.crc32, 
+                (bit<20>) 0, 
+                { 
+                    hdr.ipv4.src_addr,
+                    hdr.ipv4.dst_addr,
+                    local_metadata.ip_proto,
+                    local_metadata.l4_src_port,
+                    local_metadata.l4_dst_port
+                },
+                (bit<20>) 1048575);        
+        hdr.ipv6.payload_len = hdr.ipv4.total_len ;
+        hdr.ipv6.next_hdr = PROTO_SRV6;
+        hdr.ipv6.hop_limit = hdr.ipv4.ttl;
+        hdr.ipv6.src_addr = src_addr;
+        hdr.ipv6.dst_addr = s1;
+
+        hdr.srv6h.setValid();
+        hdr.srv6h.next_hdr = PROTO_IP_IN_IP;
+        hdr.srv6h.hdr_ext_len = 0x2;
+        hdr.srv6h.routing_type = 0x4;
+        hdr.srv6h.segment_left = 0;
+        hdr.srv6h.last_entry = 0;
+        hdr.srv6h.flags = 0;
+        hdr.srv6h.tag = 0;
+
+        hdr.srv6_list[0].setValid();
+        hdr.srv6_list[0].segment_id = s2;
+    }
+
+    direct_counter(CounterType.packets_and_bytes) srv6_encap_v4_table_counter;
+    table srv6_encap_v4 {
+        key = {
+           hdr.ipv4.dst_addr: lpm;       
+        }
+        actions = {
+            usid_encap_1_v4;
+            usid_encap_2_v4;
+            NoAction;
+        }
+        default_action = NoAction;
+        counters = srv6_encap_v4_table_counter;
+    }
+
 
     /*
      * ACL table  and actions.
@@ -297,20 +369,23 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
 	    }
 
 	    if (l2_firewall.apply().hit) {
-            switch(my_sid_table.apply().action_run) {
-                end_action: {
-                    // support for reduced SRH
-                    if (hdr.srv6h.segment_left > 0) {
-                        // set destination IP address to next segment
-                        hdr.ipv6.dst_addr = local_metadata.next_srv6_sid;
-                        // decrement segments left
-                        hdr.srv6h.segment_left = hdr.srv6h.segment_left - 1;
-                    } else {
-                        // set destination IP address to next segment
-                        hdr.ipv6.dst_addr = hdr.srv6_list[0].segment_id;
+
+            if (!srv6_encap_v4.apply().hit) {
+                switch(my_sid_table.apply().action_run) {
+                    end_action: {
+                        // support for reduced SRH
+                        if (hdr.srv6h.segment_left > 0) {
+                            // set destination IP address to next segment
+                            hdr.ipv6.dst_addr = local_metadata.next_srv6_sid;
+                            // decrement segments left
+                            hdr.srv6h.segment_left = hdr.srv6h.segment_left - 1;
+                        } else {
+                            // set destination IP address to next segment
+                            hdr.ipv6.dst_addr = hdr.srv6_list[0].segment_id;
+                        }
                     }
                 }
-            }
+            }   
             
             if (!local_metadata.xconnect) {
                 srv6_encap.apply();                       
