@@ -1,0 +1,6 @@
+table_add IngressPipeImpl.l2_firewall NoAction 01:01:01:01:01:01 0
+table_add IngressPipeImpl.srv6_encap_v4 IngressPipeImpl.usid_encap_1_v4 10.0.2.1/32 => fcbb::1 fcbb::a
+table_add IngressPipeImpl.srv6_encap_v4 IngressPipeImpl.usid_encap_2_v4 10.0.2.2/32 => fcbb::1 fcbb::a fcbb::b
+table_add IngressPipeImpl.routing_v6 IngressPipeImpl.set_next_hop fcbb::/16 => 02:02:02:02:02:02
+table_add IngressPipeImpl.unicast IngressPipeImpl.set_output_port 02:02:02:02:02:02 => 1
+

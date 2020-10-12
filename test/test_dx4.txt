@@ -1,0 +1,5 @@
+table_add IngressPipeImpl.l2_firewall NoAction 01:01:01:01:01:01 0
+table_add IngressPipeImpl.my_sid_table IngressPipeImpl.end_action_DX4 fcbb::1/128 0
+table_add IngressPipeImpl.routing_v4 IngressPipeImpl.set_next_hop_v4 10.0.1.1/24 => 02:02:02:02:02:02
+table_add IngressPipeImpl.unicast IngressPipeImpl.set_output_port 02:02:02:02:02:02 => 1
+
