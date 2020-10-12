@@ -179,6 +179,9 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
         hdr.srv6_list[0].setInvalid();
         hdr.srv6h.setInvalid();
         hdr.ipv6.setInvalid();
+        hdr.ipv6_inner.setInvalid();
+
+        hdr.ethernet.ether_type = ETHERTYPE_IPV4;
     } 
 
     direct_counter(CounterType.packets_and_bytes) my_sid_table_counter;
@@ -294,11 +297,13 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
                     local_metadata.l4_dst_port
                 },
                 (bit<20>) 1048575);
-        hdr.ipv6.payload_len = hdr.ipv4.total_len ;
+        hdr.ipv6.payload_len = hdr.ipv4.total_len;
         hdr.ipv6.next_hdr = PROTO_IP_IN_IP;
         hdr.ipv6.hop_limit = hdr.ipv4.ttl;
         hdr.ipv6.src_addr = src_addr;
         hdr.ipv6.dst_addr = s1;
+
+        hdr.ethernet.ether_type = ETHERTYPE_IPV6;
     }
 
     action usid_encap_2_v4(ipv6_addr_t src_addr, ipv6_addr_t s1, ipv6_addr_t s2) {
@@ -317,7 +322,7 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
                     local_metadata.l4_dst_port
                 },
                 (bit<20>) 1048575);        
-        hdr.ipv6.payload_len = hdr.ipv4.total_len ;
+        hdr.ipv6.payload_len = hdr.ipv4.total_len + 24;
         hdr.ipv6.next_hdr = PROTO_SRV6;
         hdr.ipv6.hop_limit = hdr.ipv4.ttl;
         hdr.ipv6.src_addr = src_addr;
@@ -334,6 +339,8 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
 
         hdr.srv6_list[0].setValid();
         hdr.srv6_list[0].segment_id = s2;
+
+        hdr.ethernet.ether_type = ETHERTYPE_IPV6;
     }
 
     direct_counter(CounterType.packets_and_bytes) srv6_encap_v4_table_counter;

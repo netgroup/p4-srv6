@@ -46,18 +46,6 @@ parser ParserImpl (packet_in packet,
         }
     }
 
-    state parse_ipv4 {
-        packet.extract(hdr.ipv4);
-        local_metadata.ip_proto = hdr.ipv4.protocol;
-        //Need header verification?
-        transition select(hdr.ipv4.protocol) {
-            PROTO_TCP: parse_tcp;
-            PROTO_UDP: parse_udp;
-            PROTO_ICMP: parse_icmp;
-            default: accept;
-        }
-    }
-
     state parse_ipv6 {
         packet.extract(hdr.ipv6);
         local_metadata.ip_proto = hdr.ipv6.next_hdr;
@@ -67,6 +55,7 @@ parser ParserImpl (packet_in packet,
             PROTO_ICMPV6: parse_icmpv6;
             PROTO_SRV6: parse_srv6;
             PROTO_IPV6: parse_ipv6_inner;
+            PROTO_IP_IN_IP: parse_ipv4;
             default: accept;
         }
     }
@@ -104,6 +93,19 @@ parser ParserImpl (packet_in packet,
             PROTO_UDP: parse_udp;
             PROTO_ICMPV6: parse_icmpv6;
             PROTO_IPV6: parse_ipv6_inner;
+            PROTO_IP_IN_IP: parse_ipv4;
+            default: accept;
+        }
+    }
+
+    state parse_ipv4 {
+        packet.extract(hdr.ipv4);
+        local_metadata.ip_proto = hdr.ipv4.protocol;
+        //Need header verification?
+        transition select(hdr.ipv4.protocol) {
+            PROTO_TCP: parse_tcp;
+            PROTO_UDP: parse_udp;
+            PROTO_ICMP: parse_icmp;
             default: accept;
         }
     }
