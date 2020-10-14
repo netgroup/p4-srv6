@@ -160,6 +160,13 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
         local_metadata.ua_next_hop = next_hop;
     }
 
+    action srv6_end_x(ipv6_addr_t next_hop) {
+        hdr.ipv6.dst_addr = (hdr.ipv6.dst_addr & UN_BLOCK_MASK) | ((hdr.ipv6.dst_addr << 32) & ~((bit<128>)UN_BLOCK_MASK));
+        local_metadata.xconnect = true;
+
+        local_metadata.ua_next_hop = next_hop;
+    }
+
     action srv6_end_dx6() {
         hdr.ipv6.version = hdr.ipv6_inner.version;
         hdr.ipv6.traffic_class = hdr.ipv6_inner.traffic_class;
@@ -191,10 +198,11 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
         }
         actions = {
             srv6_end;
-            srv6_usid_un;
-            srv6_usid_ua;
+            srv6_end_x;
             srv6_end_dx6;
             srv6_end_dx4;
+            srv6_usid_un;
+            srv6_usid_ua;
             NoAction;
         }
         default_action = NoAction;
