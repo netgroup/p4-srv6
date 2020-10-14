@@ -141,7 +141,7 @@ public class Srv6Component {
                 .build();
 
         PiTableAction action = PiAction.builder()
-                .withId(PiActionId.of("IngressPipeImpl.end_action_un"))
+                .withId(PiActionId.of("IngressPipeImpl.srv6_usid_un"))
                 .build();
 
         FlowRule myStationRule = Utils.buildFlowRule(
@@ -155,7 +155,7 @@ public class Srv6Component {
                         myUSid.toOctets(), 64)
                 .build();
         action = PiAction.builder()
-                .withId(PiActionId.of("IngressPipeImpl.end_action"))
+                .withId(PiActionId.of("IngressPipeImpl.srv6_end"))
                 .build();
         myStationRule = Utils.buildFlowRule(
                  deviceId, appId, tableId, match, action);
@@ -168,7 +168,7 @@ public class Srv6Component {
                         myUDX.toOctets(), 64)
                 .build();
             action = PiAction.builder()
-                .withId(PiActionId.of("IngressPipeImpl.end_action_DX6"))
+                .withId(PiActionId.of("IngressPipeImpl.srv6_end_dx6"))
                 .build();
             myStationRule = Utils.buildFlowRule(
                  deviceId, appId, tableId, match, action);
@@ -184,7 +184,7 @@ public class Srv6Component {
         log.info("Adding a uAInstruction on {}...", routerId);
 
         final String uATableId = "IngressPipeImpl.my_sid_table";
-        final String uAActionName = "IngressPipeImpl.end_action_ua";
+        final String uAActionName = "IngressPipeImpl.srv6_usid_ua";
 
         final String xconnTableId = "IngressPipeImpl.xconnect_table";
         final String xconnActionName = "IngressPipeImpl.xconnect_act";
