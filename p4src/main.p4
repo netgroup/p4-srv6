@@ -184,8 +184,8 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
         hdr.ethernet.ether_type = ETHERTYPE_IPV4;
     } 
 
-    direct_counter(CounterType.packets_and_bytes) my_sid_table_counter;
-    table my_sid_table {
+    direct_counter(CounterType.packets_and_bytes) srv6_localsid_table_counter;
+    table srv6_localsid_table {
         key = {
             hdr.ipv6.dst_addr: lpm;
         }
@@ -198,7 +198,7 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
             NoAction;
         }
         default_action = NoAction;
-        counters = my_sid_table_counter;
+        counters = srv6_localsid_table_counter;
     }
 
     action xconnect_act(mac_addr_t next_hop) {
@@ -402,7 +402,7 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
 	    }
 
 	    if (l2_firewall.apply().hit) {
-            switch(my_sid_table.apply().action_run) {
+            switch(srv6_localsid_table.apply().action_run) {
                 srv6_end: {
                     // support for reduced SRH
                     if (hdr.srv6h.segment_left > 0) {

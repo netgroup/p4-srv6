@@ -132,7 +132,7 @@ public class Srv6Component {
 
         log.info("Adding two myUSid rules on {} (sid {})...", deviceId, myUSid);
 
-        String tableId = "IngressPipeImpl.my_sid_table";
+        String tableId = "IngressPipeImpl.srv6_localsid_table";
 
         PiCriterion match = PiCriterion.builder()
                 .matchLpm(
@@ -183,7 +183,7 @@ public class Srv6Component {
                                     Ip6Address nextHopIpv6, MacAddress nextHopMac) {
         log.info("Adding a uAInstruction on {}...", routerId);
 
-        final String uATableId = "IngressPipeImpl.my_sid_table";
+        final String uATableId = "IngressPipeImpl.srv6_localsid_table";
         final String uAActionName = "IngressPipeImpl.srv6_usid_ua";
 
         final String xconnTableId = "IngressPipeImpl.xconnect_table";
