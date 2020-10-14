@@ -147,20 +147,20 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
         counters = ndp_reply_table_counter;
     }
 
-    action end_action() {}
+    action srv6_end() {}
 
-    action end_action_un() {
+    action srv6_usid_un() {
         hdr.ipv6.dst_addr = (hdr.ipv6.dst_addr & UN_BLOCK_MASK) | ((hdr.ipv6.dst_addr << 16) & ~((bit<128>)UN_BLOCK_MASK));
     }
 
-    action end_action_ua(ipv6_addr_t next_hop) {
+    action srv6_usid_ua(ipv6_addr_t next_hop) {
         hdr.ipv6.dst_addr = (hdr.ipv6.dst_addr & UN_BLOCK_MASK) | ((hdr.ipv6.dst_addr << 32) & ~((bit<128>)UN_BLOCK_MASK));
         local_metadata.xconnect = true;
 
         local_metadata.ua_next_hop = next_hop;
     }
 
-    action end_action_DX6() {
+    action srv6_end_dx6() {
         hdr.ipv6.version = hdr.ipv6_inner.version;
         hdr.ipv6.traffic_class = hdr.ipv6_inner.traffic_class;
         hdr.ipv6.flow_label = hdr.ipv6_inner.flow_label;
@@ -175,7 +175,7 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
         hdr.srv6_list[0].setInvalid();
     }
 
-    action end_action_DX4()  {
+    action srv6_end_dx4()  {
         hdr.srv6_list[0].setInvalid();
         hdr.srv6h.setInvalid();
         hdr.ipv6.setInvalid();
@@ -190,11 +190,11 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
             hdr.ipv6.dst_addr: lpm;
         }
         actions = {
-            end_action;
-            end_action_un;
-            end_action_ua;
-            end_action_DX6;
-            end_action_DX4;
+            srv6_end;
+            srv6_usid_un;
+            srv6_usid_ua;
+            srv6_end_dx6;
+            srv6_end_dx4;
             NoAction;
         }
         default_action = NoAction;
@@ -403,7 +403,7 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
 
 	    if (l2_firewall.apply().hit) {
             switch(my_sid_table.apply().action_run) {
-                end_action: {
+                srv6_end: {
                     // support for reduced SRH
                     if (hdr.srv6h.segment_left > 0) {
                         // set destination IP address to next segment
@@ -415,7 +415,7 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
                         hdr.ipv6.dst_addr = hdr.srv6_list[0].segment_id;
                     }
                 }
-                end_action_DX4: {
+                srv6_end_dx4: {
                     routing_v4.apply();
                 }
             }
