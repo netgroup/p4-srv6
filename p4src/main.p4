@@ -85,15 +85,22 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
 	    hdr.ipv6.hop_limit = hdr.ipv6.hop_limit - 1;
     }
 
+    // TODO: implement ecmp with ipv6.src+ipv6.dst+ipv6.flow_label
+    action_selector(HashAlgorithm.crc16, 32w64, 32w10) ip6_ecmp_selector;
     direct_counter(CounterType.packets_and_bytes) routing_v6_counter;
     table routing_v6 {
 	    key = {
 	        hdr.ipv6.dst_addr: lpm;
+
+            hdr.ipv6.flow_label : selector;
+            hdr.ipv6.dst_addr : selector;
+            hdr.ipv6.src_addr : selector;
 	    }
         actions = {
 	        set_next_hop;
         }
         counters = routing_v6_counter;
+        implementation = ip6_ecmp_selector;
     }
 
     // TODO calc checksum
@@ -343,10 +350,19 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
         hdr.ethernet.ether_type = ETHERTYPE_IPV6;
     }
 
+    // create one group 
+    action_selector(HashAlgorithm.crc16, 32w64, 32w10) ecmp_selector;
     direct_counter(CounterType.packets_and_bytes) srv6_encap_v4_table_counter;
     table srv6_encap_v4 {
         key = {
-           hdr.ipv4.dst_addr: lpm;       
+            hdr.ipv4.dscp: exact;
+            hdr.ipv4.dst_addr: lpm;
+
+            hdr.ipv4.src_addr: selector;
+            hdr.ipv4.dst_addr: selector;
+            local_metadata.ip_proto: selector;
+            local_metadata.l4_src_port: selector;
+            local_metadata.l4_dst_port: selector;
         }
         actions = {
             usid_encap_1_v4;
@@ -354,6 +370,7 @@ control IngressPipeImpl (inout parsed_headers_t hdr,
             NoAction;
         }
         default_action = NoAction;
+        implementation = ecmp_selector;
         counters = srv6_encap_v4_table_counter;
     }
 

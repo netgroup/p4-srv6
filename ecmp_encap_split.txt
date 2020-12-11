@@ -1,0 +1,36 @@
+############### SPLIT TRAFFIC among multiple SID lists with ECMP
+#
+# create a group for the ecmp selector
+act_prof_create_group IngressPipeImpl.ecmp_selector
+#
+# create members for the ecmp selector group (last two arguments are action parameters)
+act_prof_create_member IngressPipeImpl.ecmp_selector IngressPipeImpl.usid_encap_1_v4 0xfcbb0000000000000000aaaa 0xfceeeeee0000000000000001 
+act_prof_create_member IngressPipeImpl.ecmp_selector IngressPipeImpl.usid_encap_1_v4 0xfcbb0000000000000000bbbb 0xfceeeeee0000000000000002 
+#
+# add the created members to the group
+# act_prof_add_member_to_group <action_selector> <member handle> <group handle>
+act_prof_add_member_to_group IngressPipeImpl.ecmp_selector 0 0
+act_prof_add_member_to_group IngressPipeImpl.ecmp_selector 1 0
+#
+# add an entry to the table with the ecmp selector implementation
+# table_indirect_add_with_group <table name> <[match keys]> => <group handle>
+table_indirect_add_with_group IngressPipeImpl.srv6_encap_v4 0x10 1.1.1.1/32 => 0
+#
+############# ROUTING v6 with ECMP
+#
+# create a group for the routing_v6 ecmp selector
+act_prof_create_group IngressPipeImpl.ip6_ecmp_selector
+#
+# create members for the ecmp selector group (last two arguments are action parameters)
+act_prof_create_member IngressPipeImpl.ip6_ecmp_selector IngressPipeImpl.set_next_hop 22:22:22:22:22:22
+act_prof_create_member IngressPipeImpl.ip_6ecmp_selector IngressPipeImpl.set_next_hop 33:33:33:33:33:33
+#
+# add the created members to the group
+# act_prof_add_member_to_group <action_selector> <member handle> <group handle>
+act_prof_add_member_to_group IngressPipeImpl.ip6_ecmp_selector 0 0
+act_prof_add_member_to_group IngressPipeImpl.ip6_ecmp_selector 1 0
+#
+# add an entry to the table with the ecmp selector implementation
+# table_indirect_add_with_group <table name> <[match keys]> => <group handle>
+table_indirect_add_with_group IngressPipeImpl.routing_v6 0xfceeeeee0000000000000001/128 => 0
+table_indirect_add_with_group IngressPipeImpl.routing_v6 0xfceeeeee0000000000000002/128 => 0
